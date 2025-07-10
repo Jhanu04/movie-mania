@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Movie Recommendations</title>
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+        rel="stylesheet"
+    />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f8f9fa;
+            scroll-behavior: smooth;
+        }
+        .navbar-nav .nav-item:hover .nav-link {
+            color: #ff6347;
+            font-weight: bold;
+        }
+        .movie-card {
+            transition: transform 0.2s ease-in-out;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+        .movie-card:hover {
+            transform: scale(1.05);
+        }
+        .movie-card img {
+            height: 300px;
+            object-fit: cover;
+        }
+        .movie-description {
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .welcome-section {
+            text-align: center;
+            padding: 100px 20px;
+        }
+        .welcome-section h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .welcome-section p {
+            font-size: 1.2rem;
+        }
+        .genre-filters {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .star-rating {
+            color: #ffc107;
+            font-size: 1.1rem;
+        }
+        .review-section {
+            margin-top: 15px;
+        }
+        .review-section textarea {
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Movie Mania</a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#scifi">Sci-Fi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#drama">Drama</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#animation">Animation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#thriller">Thriller</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="welcome-section">
+        <h1>Welcome to Movie Mania 🎥✨</h1>
+        <p>Discover some amazing movies across different genres!</p>
+    </section>
+
+    <!-- Filter Buttons -->
+    <div class="genre-filters container">
+        <button class="btn btn-outline-primary m-1 filter-btn" data-genre="scifi">Sci-Fi</button>
+        <button class="btn btn-outline-primary m-1 filter-btn" data-genre="drama">Drama</button>
+        <button class="btn btn-outline-primary m-1 filter-btn" data-genre="animation">Animation</button>
+        <button class="btn btn-outline-primary m-1 filter-btn" data-genre="thriller">Thriller</button>
+        <button class="btn btn-outline-secondary m-1 filter-btn" data-genre="all">Show All</button>
+    </div>
+
+    <!-- Sci-Fi Movies -->
+    <section id="scifi" class="container my-5 genre-section">
+        <h2 class="text-center">Sci-Fi Movies</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card movie-card">
+                    <img src="images/inception.png" alt="Inception" />
+                    <div class="card-body">
+                        <h5>Inception</h5>
+                        <p class="movie-description">A mind-bending thriller where dreams are the ultimate weapon.</p>
+                        <p class="star-rating">⭐⭐⭐⭐⭐</p>
+                        <button
+                            class="btn btn-sm btn-dark"
+                            data-bs-toggle="modal"
+                            data-bs-target="#trailerModal"
+                            data-trailer="https://www.youtube.com/embed/YoHD9XEInc0"
+                        >
+                            Watch Trailer
+                        </button>
+                        <div class="review-section">
+                            <textarea
+                                class="form-control mb-2"
+                                rows="2"
+                                placeholder="Leave a review..."
+                            ></textarea>
+                            <button class="btn btn-sm btn-outline-success submit-review-btn">Submit</button>
+                            <div class="reviews-list mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card movie-card">
+                    <img src="images/gravity.jpg" alt="Gravity" />
+                    <div class="card-body">
+                        <h5>Gravity</h5>
+                        <p class="movie-description">Two astronauts struggle for survival in the vastness of space.</p>
+                        <p class="star-rating">⭐⭐⭐⭐</p>
+                        <button
+                            class="btn btn-sm btn-dark"
+                            data-bs-toggle="modal"
+                            data-bs-target="#trailerModal"
+                            data-trailer="https://www.youtube.com/embed/OiTiKOy59o4"
+                        >
+                            Watch Trailer
+                        </button>
+                        <div class="review-section">
+                            <textarea
+                                class="form-control mb-2"
+                                rows="2"
+                                placeholder="Leave a review..."
+                            ></textarea>
+                            <button class="btn btn-sm btn-outline-success submit-review-btn">Submit</button>
+                            <div class="reviews-list mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card movie-card">
+                    <img src="images/tenet.jpg" alt="Tenet" />
+                    <div class="card-body">
+                        <h5>Tenet</h5>
+                        <p class="movie-description">
+                            A mysterious agent fights to prevent World War III with time inversion.
+                        </p>
+                        <p class="star-rating">⭐⭐⭐⭐⭐</p>
+                        <button
+                            class="btn btn-sm btn-dark"
+                            data-bs-toggle="modal"
+                            data-bs-target="#trailerModal"
+                            data-trailer="https://www.youtube.com/embed/L3pk_TBkihU"
+                        >
+                            Watch Trailer
+                        </button>
+                        <div class="review-section">
+                            <textarea
+                                class="form-control mb-2"
+                                rows="2"
+                                placeholder="Leave a review..."
+                            ></textarea>
+                            <button class="btn btn-sm btn-outline-success submit-review-btn">Submit</button>
+                            <div class="reviews-list mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section id="drama" class="container my-5 genre-section">
+    <h2 class="text-center">Drama Movies</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card movie-card">
+                <img src="images/how.jpg" alt="How to Lose a Guy in 10 Days" />
+                <div class="card-body">
+                    <h5>How to Lose a Guy in 10 Days</h5>
+                    <p class="movie-description">
+                        A columnist and an ad exec try to outwit each other in love.
+                    </p>
+                    <p class="star-rating">⭐⭐⭐⭐</p>
+                    <button
+                        class="btn btn-sm btn-dark"
+                        data-bs-toggle="modal"
+                        data-bs-target="#trailerModal"
+                        data-trailer="https://www.youtube.com/embed/5_KjOqA_qQY"
+                    >
+                        Watch Trailer
+                    </button>
+                    <div class="review-section">
+                        <textarea
+                            class="form-control mb-2"
+                            rows="2"
+                            placeholder="Leave a review..."
+                        ></textarea>
+                        <button class="btn btn-sm btn-outline-success submit-review-btn">Submit</button>
+                        <div class="reviews-list mt-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card movie-card">
+                <img src="images/lalaland.jpg" alt="La La Land" />
+                <div class="card-body">
+                    <h5>La La Land</h5>
+                    <p class="movie-description">
+                        A jazz musician and an aspiring actress chase dreams and love.
+                    </p>
+                    <p class="star-rating">⭐⭐⭐⭐⭐</p>
+                    <button
+                        class="btn btn-sm btn-dark"
+                        data-bs-toggle="modal"
+                        data-bs-target="#trailerModal"
+                        data-trailer="https://www.youtube.com/embed/0pdqf4P9MB8"
+                    >
+                        Watch Trailer
+                    </button>
+                    <div class="review-section">
+                        <textarea
+                            class="form-control mb-2"
+                            rows="2"
+                            placeholder="Leave a review..."
+                        ></textarea>
+                        <button class="btn btn-sm btn-outline-success submit-review-btn">Submit</button>
+                        <div class="reviews-list mt-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card movie-card">
+                <img src="images/deadpoets.jpg" alt="Dead Poets Society" />
+                <div class="card-body">
+                    <h5>Dead Poets Society</h5>
+                    <p class="movie-description">
+                        An inspiring teacher encourages students to seize the day.
+                    </p>
+                    <p class="star-rating">⭐⭐⭐⭐⭐</p>
+                    <button
+                        class="btn btn-sm btn-dark"
+                        data-bs-toggle="modal"
+                        data-bs-target="#trailerModal"
+                        data-trailer="https://www.youtube.com/embed/wrBk780aOis"
+                    >
+                        Watch Trailer
+                    </button>
+                    <div class="review-section">
+                        <textarea
+                            class="form-control mb-2"
+                            rows="2"
+                            placeholder="Leave a review..."
+                        ></textarea>
+                        <button class="btn btn-sm btn-outline-success submit-review-btn">Submit</button>
+                        <div class="reviews-list mt-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+    <!-- Animation Movies -->
+    <section id="animation" class="container my-5 genre-section">
+        <h2 class="text-center">Animation Movies</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card movie-card">
+                    <img src="images/frozen.jpg" alt="Frozen" />
+                    <div class="card-body">
+                        <h5>Frozen</h5>
+                        <p class="movie-description">
+                            Two sisters embark on an epic journey of love and self-discovery.
+                        </p>
+                        <p class="star-rating">⭐⭐⭐⭐⭐</p>
+                        <button
+                            class="btn btn-sm btn-dark"
+                            data-bs-toggle="modal"
+                            data-bs-target="#trailerModal"
+                            data-trailer="https://www.youtube.com/embed/TbQm5doF_Uc"
+                        >
+                            Watch Trailer
+                        </button>
+                        <div class="review-section">
+                            <textarea
+                                class="form-control mb-2"
+                                rows="2"
+                                placeholder="Leave a review..."
+                            ></textarea>
+                            <button class="btn btn-sm btn-outline-success submit-review-btn">Submit</button>
+                            <div class="reviews-list mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card movie-card">
+                    <img src="images/pancreas.jpg" alt="I Want to Eat Your Pancreas" />
+                    <div class="card-body">
+                        <h5>I Want to Eat Your Pancreas</h5>
+                        <p class="movie-description">
+                            A touching story about life, friendship, and loss.
+                        </p>
+                        <p class="star-rating">⭐⭐⭐⭐</p>
+                        <button
+                            class="btn btn-sm btn-dark"
+                            data-bs-toggle="modal"
+                            data-bs-target="#trailerModal"
+                            data-trailer="https://www.youtube.com/embed/MDyU2Iu0PsM"
+                        >
+                            Watch Trailer
+                        </button>
+                        <div class="review-section">
+                            <textarea
+                                class="form-control mb-2"
+                                rows="2"
+                                placeholder="Leave a review..."
+                            ></textarea>
+                            <button class="btn btn-sm btn-outline-success submit-review-btn">Submit</button>
+                            <div class="reviews-list mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card movie-card">
+                    <img src="images/spirited.jpg" alt="Spirited Away" />
+                    <div class="card-body">
+                        <h5>Spirited Away</h5>
+                        <p class="movie-description">
+                            A young girl discovers a magical world of spirits and adventure.
+                        </p>
+                        <p class="star-rating">⭐⭐⭐⭐⭐</p>
+                        <button
+                            class="btn btn-sm btn-dark"
+                            data-bs-toggle="modal"
+                            data-bs-target="#trailerModal"
+                            data-trailer="https://www.youtube.com/embed/ByXuk9QqQkk"
+                        >
+                            Watch Trailer
+                        </button>
+                        <div class="review-section">
+                            <textarea
+                                class="form-control mb-2"
+                                rows="2"
+                                placeholder="Leave a review..."
+                            ></textarea>
+                            <button class="btn btn-sm btn-outline-success submit-review-btn">Submit</button>
+                            <div class="reviews-list mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thriller Movies -->
+    <section id="thriller" class="container my-5 genre-section">
+        <h2 class="text-center">Thriller Movies</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card movie-card">
+                    <img src="images/saw.jpg" alt="Saw" />
+                    <div class="card-body">
+                        <h5>Saw</h5>
+                        <p class="movie-description">A twisted game of survival with deadly consequences.</p>
+                        <p class="star-rating">⭐⭐⭐⭐</p>
+                        <button
+                            class="btn btn-sm btn-dark"
+                            data-bs-toggle="modal"
+                            data-bs-target="#trailerModal"
+                            data-trailer="https://www.youtube.com/embed/LEo0lU-H5xY"
+                        >
+                            Watch Trailer
+                        </button>
+                        <div class="review-section">
+                            <textarea
+                                class="form-control mb-2"
+                                rows="2"
+                                placeholder="Leave a review..."
+                            ></textarea>
+                            <button class="btn btn-sm btn-outline-success submit-review-btn">Submit</button>
+                            <div class="reviews-list mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card movie-card">
+                    <img src="images/ring.jpg" alt="Ring" />
+                    <div class="card-body">
+                        <h5>Ring</h5>
+                        <p class="movie-description">
+                            A cursed videotape brings terror to anyone who watches it.
+                        </p>
+                        <p class="star-rating">⭐⭐⭐⭐⭐</p>
+                        <button
+                            class="btn btn-sm btn-dark"
+                            data-bs-toggle="modal"
+                            data-bs-target="#trailerModal"
+                            data-trailer="https://www.youtube.com/embed/mcj2P5vx0aI"
+                        >
+                            Watch Trailer
+                        </button>
+                        <div class="review-section">
+                            <textarea
+                                class="form-control mb-2"
+                                rows="2"
+                                placeholder="Leave a review..."
+                            ></textarea>
+                            <button class="btn btn-sm btn-outline-success submit-review-btn">Submit</button>
+                            <div class="reviews-list mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card movie-card">
+                    <img src="images/prisoners.jpg" alt="Prisoners" />
+                    <div class="card-body">
+                        <h5>Prisoners</h5>
+                        <p class="movie-description">
+                            A father takes desperate measures to find his missing daughter.
+                        </p>
+                        <p class="star-rating">⭐⭐⭐⭐</p>
+                        <button
+                            class="btn btn-sm btn-dark"
+                            data-bs-toggle="modal"
+                            data-bs-target="#trailerModal"
+                            data-trailer="https://www.youtube.com/embed/DqZxczK4lpY"
+                        >
+                            Watch Trailer
+                        </button>
+                        <div class="review-section">
+                            <textarea
+                                class="form-control mb-2"
+                                rows="2"
+                                placeholder="Leave a review..."
+                            ></textarea>
+                            <button class="btn btn-sm btn-outline-success submit-review-btn">Submit</button>
+                            <div class="reviews-list mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trailer Modal -->
+    <div
+        class="modal fade"
+        id="trailerModal"
+        tabindex="-1"
+        aria-labelledby="trailerModalLabel"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="trailerModalLabel">Trailer</h5>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+                </div>
+                <div class="modal-body">
+                    <div class="ratio ratio-16x9">
+                        <iframe
+                            id="trailerVideo"
+                            src=""
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                        ></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS bundle (Popper + Bootstrap JS) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script>
+     // Genre filtering
+const filterButtons = document.querySelectorAll('.filter-btn');
+const genreSections = document.querySelectorAll('.genre-section');
+
+filterButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+        const genre = btn.getAttribute('data-genre');
+
+        if (genre === 'all') {
+            genreSections.forEach(section => section.style.display = 'block');
+        } else {
+            genreSections.forEach(section => {
+                if (section.id === genre) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+    });
+});
+
+// Trailer modal video setup
+const trailerModal = document.getElementById('trailerModal');
+const trailerVideo = document.getElementById('trailerVideo');
+
+trailerModal.addEventListener('show.bs.modal', (event) => {
+    const button = event.relatedTarget;
+    const trailerSrc = button.getAttribute('data-trailer');
+    trailerVideo.src = trailerSrc + "?autoplay=1&modestbranding=1&showinfo=0";
+});
+
+trailerModal.addEventListener('hidden.bs.modal', () => {
+    trailerVideo.src = "";
+});
+
+// Review submission
+document.querySelectorAll('.submit-review-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const reviewSection = button.closest('.review-section');
+        const textarea = reviewSection.querySelector('textarea');
+        const reviewsList = reviewSection.querySelector('.reviews-list');
+        const reviewText = textarea.value.trim();
+
+        if (reviewText.length > 0) {
+            const reviewItem = document.createElement('p');
+            reviewItem.textContent = reviewText;
+            reviewItem.classList.add('review-item', 'border', 'p-2', 'rounded', 'mb-2');
+            reviewsList.appendChild(reviewItem);
+            textarea.value = "";
+        }
+    });
+});</script>
+
